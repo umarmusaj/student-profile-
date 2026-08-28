@@ -1,0 +1,9 @@
+{
+  "name": "Student Profile App",
+  "short_name": "Student Profile",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0066cc",
+  "description": "Student profile web application"
+}
