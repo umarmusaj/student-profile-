@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ha">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muslim Duas App - 100</title>
+<style>
+body{font-family:sans-serif;background:#e8f5e9;padding:10px;margin:0}
+.header{text-align:center;background:#2e7d32;color:white;padding:15px;border-radius:10px;position:sticky;top:0}
+.card{background:white;margin:10px 0;padding:12px;border-radius:8px;box-shadow:0 2px 4px #ccc}
+.arabic{font-size:20px;text-align:right;direction:rtl;color:#1b5e20;font-weight:bold}
+h3{color:#2e7d32;margin:5px 0}
+</style>
+</head>
+<body>
+<div class="header">
+  <h2>Muslim Duas App</h2>
+  <p><b>Name:</b> Umar Musa | <b>Matric:</b> CSEU/25/10702</p>
+  <p><b>Dept:</b> Computer Science and Education</p>
+  <p><b>School:</b> Sa'adu Zungur University, Gadau</p>
+</div>
+<div id="duas"></div>
+
+<script>
+const duas = [
+{title:"1. Addu'ar Fita Gida", arabic:"بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ", hausa:"Da sunan Allah, na dogara ga Allah"},
+{title:"2. Addu'ar Shiga Gida", arabic:"بِسْمِ اللَّهِ وَلَجْنَا", hausa:"Da sunan Allah muka shiga"},
+{title:"3. Addu'ar Cin Abinci", arabic:"بِسْمِ اللَّهِ", hausa:"Da sunan Allah"},
+{title:"4. Addu'ar Bayan Cin Abinci", arabic:"الْحَمْدُ لِلَّهِ", hausa:"Godi ya tabbata ga Allah"},
+{title:"5. Addu'ar Shiga Bandaki", arabic:"اللَّهُمَّ إِنِّي أَعُوذُ بِكَ", hausa:"Ya Allah ina neman tsari a gare Ka"},
+{title:"6. Addu'ar Fita Bandaki", arabic:"غُفْرَانَكَ", hausa:"Ina neman gafara a gare Ka"},
+{title:"7. Addu'ar Barci", arabic:"بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا", hausa:"Da sunanKa Ya Allah nake mutuwa da rayuwa"},
+{title:"8. Addu'ar Farkawa", arabic:"الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا", hausa:"Godi ya tabbata ga Allah wanda ya tayar da mu"},
+{title:"9. Addu'ar Lafiya", arabic:"اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَافِيَةَ", hausa:"Ya Allah ina rokonKa lafiya"},
+{title:"10. Addu'ar Ilimi", arabic:"رَبِّ زِدْنِي عِلْمًا", hausa:"Ya Ubangiji ka kara min ilimi"},
+{title:"11. Addu'ar Damuwa", arabic:"اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ", hausa:"Ya Allah ina neman tsari daga damuwa"},
+{title:"12. Addu'ar Sallah", arabic:"اللَّهُمَّ اجْعَلْنِي مُقِيمَ الصَّلَاةِ", hausa:"Ya Allah ka sanya ni mai tsayawa da sallah"},
+{title:"13. Addu'ar Iyaye", arabic:"رَّبِّ ارْحَمْهُمَا", hausa:"Ya Ubangiji ka yi musu rahama"},
+{title:"14. Addu'ar Tafiya", arabic:"سُبْحَانَ الَّذِي سَخَّرَ لَنَا", hausa:"Tsarki ya tabbata ga wanda ya ba mu hawa"},
+{title:"15. Addu'ar Ruwan Sama", arabic:"اللَّهُمَّ صَيِّبًا نَافِعًا", hausa:"Ya Allah ka sanya ruwan da zai amfana"},
+{title:"16. Addu'ar Bacci", arabic:"اللَّهُمَّ بِاسْمِكَ أَحْيَا وَأَمُوتُ", hausa:"Ya Allah da sunanKa nake rayuwa da mutuwa"},
+{title:"17. Addu'ar Fara Aiki", arabic:"اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَهَا", hausa:"Ya Allah ina rokonKa alkhairin ta"},
+{title:"18. Addu'ar Godiya", arabic:"الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ", hausa:"Godi ya tabbata ga Allah Ubangijin talikai"},
+{title:"19. Addu'ar Gafara", arabic:"أَسْتَغْفِرُ اللَّهَ", hausa:"Ina neman gafara daga Allah"},
+{title:"20. Addu'ar Kariya", arabic:"أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ", hausa:"Ina neman tsari da kalmomin Allah"},
+{title:"21. Addu'ar Shiga Masallaci", arabic:"اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ", hausa:"Ya Allah ka bude min kofofin rahama"},
+{title:"22. Addu'ar Fita Masallaci", arabic:"اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ", hausa:"Ya Allah ina rokonKa daga falalarKa"},
+{title:"23. Addu'ar Gani Wata", arabic:"اللَّهُمَّ أَهِلَّهُ عَلَيْنَا", hausa:"Ya Allah ka sa ya fito mana"},
+{title:"24. Addu'ar damuwa", arabic:"لَا إِلَهَ إِلَّا أَنْتَ سُبْحَانَكَ", hausa:"Babu abin bautawa sai Kai"},
+{title:"25. Addu'ar Rashin Bacci", arabic:"اللَّهُمَّ غَارَتِ النُّجُومُ", hausa:"Ya Allah taurari sun ɓace"},
+{title:"26. Addu'ar Ruhu", arabic:"اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَهَا", hausa:"Ya Allah ina rokonKa alkhairin iska"},
+{title:"27. Addu'ar Girgije", arabic:"اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ شَرِّهَا", hausa:"Ya Allah ina neman tsari daga sharri"},
+{title:"28. Addu'ar Tsoro", arabic:"اللَّهُ أَكْبَرُ اللَّهُ أَكْبَرُ", hausa:"Allah Mafi girma"},
+{title:"29. Addu'ar Tashin Hankali", arabic:"حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ", hausa:"Allah Ya ishe mu"},
+{title:"30. Addu'ar Neman Arziki", arabic:"اللَّهُمَّ ارْزُقْنِي رِزْقًا وَاسِعًا", hausa:"Ya Allah ka ba ni arziki mai yawa"},
+{title:"31. Addu'ar Jarabawa", arabic:"إِنَّا لِلَّهِ وَإِنَّا إِلَيْهِ رَاجِعُونَ", hausa:"Mu na Allah ne kuma zuwa Gare shi zamu koma"},
+{title:"32. Addu'ar Mara lafiya", arabic:"أَسْأَلُ اللَّهَ الْعَظِيمَ", hausa:"Ina rokon Allah Mai girma"},
+{title:"33. Addu'ar Sabuwar Riga", arabic:"الْحَمْدُ لِلَّهِ الَّذِي كَسَانِي", hausa:"Godi ya tabbata ga Allah wanda ya tufatar da ni"},
+{title:"34. Addu'ar Dubura", arabic:"سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ", hausa:"Tsarki ya tabbata ga Ka Ya Allah"},
+{title:"35. Addu'ar Majalisi", arabic:"سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ", hausa:"Tsarki ya tabbata ga Ka Ya Allah"},
+{title:"36. Addu'ar Jin Dadi", arabic:"الْحَمْدُ لِلَّهِ عَلَى كُلِّ حَالٍ", hausa:"Godi ya tabbata ga Allah a kowane hali"},
+{title:"37. Addu'ar Kuka", arabic:"إِنَّا لِلَّهِ وَإِنَّا إِلَيْهِ رَاجِعُونَ", hausa:"Mu na Allah ne kuma zuwa Gare shi zamu koma"},
+{title:"38. Addu'ar Wanka", arabic:"بِسْمِ اللَّهِ", hausa:"Da sunan Allah"},
+{title:"39. Addu'ar Fara Karatu", arabic:"رَبِّ اشْرَحْ لِي صَدْرِي", hausa:"Ya Ubangiji ka faɗaɗa min kirji"},
+{title:"40. Addu'ar Jarrabawa", arabic:"اللَّهُمَّ لَا سَهْلَ إِلَّا مَا جَعَلْتَهُ", hausa:"Ya Allah babu sauki sai abin da Ka sauwaka"},
+{title:"41. Addu'ar Manta", arabic:"اللَّهُمَّ ذَكِّرْنِي مَا نَسِيتُ", hausa:"Ya Allah ka tunatar da ni abin da na manta"},
+{title:"42. Addu'ar Gani Mafarki", arabic:"أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ", hausa:"Ina neman tsari daga shaidan"},
+{title:"43. Addu'ar Azumi", arabic:"اللَّهُمَّ إِنِّي نَوَيْتُ صَوْمَ", hausa:"Ya Allah na niyyaci azumin"},
+{title:"44. Addu'ar Bude Baki", arabic:"اللَّهُمَّ إِنِّي لَكَ صُمْتُ", hausa:"Ya Allah na yi azumi ne gare Ka"},
+{title:"45. Addu'ar Sadaqa", arabic:"اللَّهُمَّ تَقَبَّلْهَا مِنِّي", hausa:"Ya Allah ka karba daga gare ni"},
+{title:"46. Addu'ar Auren", arabic:"اللَّهُمَّ بَارِكْ لَهُمَا", hausa:"Ya Allah ka musu albarka"},
+{title:"47. Addu'ar Sabuwar Gida", arabic:"اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَهَا", hausa:"Ya Allah ina rokonKa alkhairin ta"},
+{title:"48. Addu'ar Shiga Kasuwa", arabic:"لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ", hausa:"Babu abin bautawa sai Allah"},
+{title:"49. Addu'ar Rashi", arabic:"إِنَّا لِلَّهِ وَإِنَّا إِلَيْهِ رَاجِعُونَ", hausa:"Mu na Allah ne"},
+{title:"50. Addu'ar Sanyi", arabic:"اللَّهُمَّ إِنِّي أَعُوذُ بِكَ", hausa:"Ya Allah ina neman tsari a gare Ka"},
+{title:"51. Addu'ar Zafi", arabic:"اللَّهُمَّ أَجِرْنِي مِنَ النَّارِ", hausa:"Ya Allah ka tsare ni daga wuta"},
+{title:"52. Addu'ar Ruwa", arabic:"اللَّهُمَّ اسْقِنَا غَيْثًا", hausa:"Ya Allah ka ba mu ruwan sama"},
+{title:"53. Addu'ar Iska", arabic:"اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَهَا", hausa:"Ya Allah ina rokonKa alkhairin ta"},
+{title:"54. Addu'ar Duhu", arabic:"اللَّهُمَّ اجْعَلْ فِي قَلْبِي نُورًا", hausa:"Ya Allah ka sanya haske a zuciya"},
+{title:"55. Addu'ar Haske", arabic:"اللَّهُمَّ اجْعَلْ فِي بَصَرِي نُورًا", hausa:"Ya Allah ka sanya haske a idona"},
+{title:"56. Addu'ar Hannu", arabic:"اللَّهُمَّ إِنِّي أَسْأَلُكَ", hausa:"Ya Allah ina rokonKa"},
+{title:"57. Addu'ar Kafa", arabic:"اللَّهُمَّ ثَبِّتْ قَدَمِي", hausa:"Ya Allah ka tabbatar da kafata"},
+{title:"58. Addu'ar Baki", arabic:"اللَّهُمَّ احْفَظْ لِسَانِي", hausa:"Ya Allah ka tsare harshena"},
+{title:"59. Addu'ar Kunne", arabic:"اللَّهُمَّ احْفَظْ سَمْعِي", hausa:"Ya Allah ka tsare jinina"},
+{title:"60. Addu'ar Ido", arabic:"اللَّهُمَّ احْفَظْ بَصَرِي", hausa:"Ya Allah ka tsare gani na"},
+{title:"61. Addu'ar Zuciya", arabic:"اللَّهُمَّ ثَبِّتْ قَلْبِي", hausa:"Ya Allah ka tabbatar da zuciya ta"},
+{title:"62. Addu'ar Hankali", arabic:"اللَّهُمَّ زِدْنِي عَقْلًا", hausa:"Ya Allah ka kara min hankali"},
+{title:"63. Addu'ar Hakuri", arabic:"اللَّهُمَّ ارْزُقْنِي الصَّبْرَ", hausa:"Ya Allah ka ba ni hakuri"},
+{title:"64. Addu'ar Shukr", arabic:"اللَّهُمَّ أَعِنِّي عَلَى ذِكْرِكَ", hausa:"Ya Allah ka taimake ni wajen tunawa da Ka"},
+{title:"65. Addu'ar Tawakkali", arabic:"حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ", hausa:"Allah Ya ishe ni"},
+{title:"66. Addu'ar Istikhara", arabic:"اللَّهُمَّ إِنِّي أَسْتَخِيرُكَ", hausa:"Ya Allah ina neman jagora daga Gare Ka"},
+{title:"67. Addu'ar Neman Gafara", arabic:"رَبِّ اغْفِرْ لِي", hausa:"Ya Ubangiji ka gafarta min"},
+{title:"68. Addu'ar Rahama", arabic:"اللَّهُمَّ ارْحَمْنِي", hausa:"Ya Allah ka yi mini rahama"},
+{title:"69. Addu'ar Tsari", arabic:"اللَّهُمَّ إِنِّي أَعُوذُ بِكَ", hausa:"Ya Allah ina neman tsari a gare Ka"},
+{title:"70. Addu'ar Nasara", arabic:"اللَّهُمَّ انْصُرْنِي", hausa:"Ya Allah ka ba ni nasara"},
+{title:"71. Addu'ar Karfi", arabic:"اللَّهُمَّ قَوِّنِي", hausa:"Ya Allah ka ba ni karfi"},
+{title:"72. Addu'ar Hikima", arabic:"اللَّهُمَّ ارْزُقْنِي الْحِكْمَةَ", hausa:"Ya Allah ka ba ni hikima"},
+{title:"73. Addu'ar Fahimta", arabic:"اللَّهُمَّ فَقِّهْنِي", hausa:"Ya Allah ka ba ni fahimta"},
+{title:"74. Addu'ar Adalci", arabic:"اللَّهُمَّ ارْزُقْنِي الْعَدْلَ", hausa:"Ya Allah ka ba ni adalci"},
+{title:"75. Addu'ar Gaskiya", arabic:"اللَّهُمَّ ارْزُقْنِي الصِّدْقَ", hausa:"Ya Allah ka ba ni gaskiya"},
+{title:"76. Addu'ar Amana", arabic:"اللَّهُمَّ ارْزُقْنِي الْأَمَانَةَ", hausa:"Ya Allah ka ba ni amana"},
+{title:"77. Addu'ar Iffah", arabic:"اللَّهُمَّ ارْزُقْنِي الْعِفَّةَ", hausa:"Ya Allah ka ba ni tsabta"},
+{title:"78. Addu'ar Kunya", arabic:"اللَّهُمَّ ارْزُقْنِي الْحَيَاءَ", hausa:"Ya Allah ka ba ni kunya"},
+{title:"79. Addu'ar Sakayya", arabic:"اللَّهُمَّ اجْزِنِي خَيْرًا", hausa:"Ya Allah ka saka ni da alkhairi"},
+{title:"80. Addu'ar Albarka", arabic:"اللَّهُمَّ بَارِكْ لِي", hausa:"Ya Allah ka ba ni albarka"},
+{title:"81. Addu'ar Tsira", arabic:"اللَّهُمَّ نَجِّنِي", hausa:"Ya Allah ka tsare ni"},
+{title:"82. Addu'ar Fita Wahala", arabic:"اللَّهُمَّ فَرِّجْ هَمِّي", hausa:"Ya Allah ka kawar da damuwata"},
+{title:"83. Addu'ar Biyan Bashi", arabic:"اللَّهُمَّ اقْضِ دَيْنِي", hausa:"Ya Allah ka biya bashina"},
+{title:"84. Addu'ar Yara", arabic:"رَبِّ هَبْ لِي ذُرِّيَّةً", hausa:"Ya Ubangiji ka ba ni zuriya"},
+{title:"85. Addu'ar Mata", arabic:"رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا", hausa:"Ya UbangijinMu ka ba mu daga matanMu"},
+{title:"86. Addu'ar Iyali", arabic:"اللَّهُمَّ أَصْلِحْ أَهْلِي", hausa:"Ya Allah ka gyara iyalina"},
+{title:"87. Addu'ar Maƙwabta", arabic:"اللَّهُمَّ أَصْلِحْ جِيرَانِي", hausa:"Ya Allah ka gyara maƙwabtana"},
+{title:"88. Addu'ar Al'umma", arabic:"اللَّهُمَّ أَصْلِحْ أُمَّةَ مُحَمَّدٍ", hausa:"Ya Allah ka gyara al'ummar Muhammad"},
+{title:"89. Addu'ar Shugaba", arabic:"اللَّهُمَّ أَصْلِحْ وُلَاةَ أَمْرِنَا", hausa:"Ya Allah ka gyara shugabanninMu"},
+{title:"90. Addu'ar Ƙasa", arabic:"اللَّهُمَّ احْفَظْ بِلَادَنَا", hausa:"Ya Allah ka tsare ƙasarmu"},
+{title:"91. Addu'ar Zaman Lafiya", arabic:"اللَّهُمَّ اجْعَلْنَا مِن
