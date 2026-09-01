@@ -1,7 +1,0 @@
-self.addEventListener("install", (event) => {
-  console.log("App installed");
-});
-
-self.addEventListener("fetch", (event) => {
-  event.respondWith(fetch(event.request));
-});
